@@ -1,5 +1,6 @@
 // Use 'npx mocha' to run these tests from the project directory
 
+// The following line allows recognition of mocha commands by eslint
 /* eslint-env mocha */
 const deepEqual = require('deep-equal');
 const wish = require('wish');
