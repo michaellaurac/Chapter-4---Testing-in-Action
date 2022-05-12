@@ -10,8 +10,10 @@ const {
   checkHand,
   valuesFromHand,
   highestCount,
+  allCounts,
   multiplesIn,
   isPair,
+  isFullHouse,
   isTriple,
   isQuadruple,
   suitsFor,
@@ -38,6 +40,13 @@ describe('highestCount()', function () {
   });
 });
 
+describe('allCounts()', function () {
+  it('returns the counts of all cards from array', function () {
+    const result = allCounts(['2', '3', '4', '5', '2']);
+    wish(deepEqual(result, [2, 1, 1, 1]));
+  });
+});
+
 describe('multiplesIn()', function () {
   it('finds a duplicate', function () {
     const result = multiplesIn(['2-H', '3-C', '4-D', '5-H', '2-C']);
@@ -48,6 +57,13 @@ describe('multiplesIn()', function () {
 describe('isPair()', function () {
   it('finds a pair', function () {
     const result = isPair(['2-H', '3-C', '4-D', '5-H', '2-C']);
+    wish(result);
+  });
+});
+
+describe('isFullHouse()', function () {
+  it('handles full house', function () {
+    const result = isFullHouse(['2-D', '2-H', '3-H', '3-D', '3-C']);
     wish(result);
   });
 });
@@ -156,6 +172,10 @@ describe('checkHand()', function () {
   it('handles straight flush', function () {
     const result = checkHand(['1-H', '2-H', '3-H', '4-H', '5-H']);
     wish(result === 'straight flush');
+  });
+  it('handles full house', function () {
+    const result = checkHand(['2-D', '2-H', '3-H', '3-D', '3-C']);
+    wish(result === 'full house');
   });
   it('handles high card', function () {
     const result = checkHand(['2-H', '5-C', '9-D', '7-S', '3-H']);

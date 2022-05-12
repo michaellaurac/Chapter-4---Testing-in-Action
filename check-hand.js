@@ -1,6 +1,8 @@
 function checkHand (hand) {
   if (isPair(hand)) {
     return 'pair';
+  } else if (isFullHouse(hand)) {
+    return 'full house';
   } else if (isTriple(hand)) {
     return 'three of a kind';
   } else if (isQuadruple(hand)) {
@@ -50,12 +52,45 @@ function highestCount (values) {
   })[0];
 }
 
+function allCounts (values) {
+  const counts = [];
+  values.forEach(function (value, index) {
+    counts[value] = 0;
+    if (value === values[0]) {
+      counts[value] = counts[value] + 1;
+    }
+    if (value === values[1]) {
+      counts[value] = counts[value] + 1;
+    }
+    if (value === values[2]) {
+      counts[value] = counts[value] + 1;
+    }
+    if (value === values[3]) {
+      counts[value] = counts[value] + 1;
+    }
+    if (value === values[4]) {
+      counts[value] = counts[value] + 1;
+    }
+  });
+  const totalCounts = Object.keys(counts).map(function (key) {
+    return counts[key];
+  });
+  return totalCounts.sort(function(a, b) {
+    return b - a;
+  });
+}
+
 function multiplesIn (hand) {
   return highestCount(valuesFromHand(hand));
 }
 
 function isPair (hand) {
   return multiplesIn(hand) === 2;
+}
+
+function isFullHouse (hand) {
+  const theCounts = allCounts(valuesFromHand(hand));
+  return (theCounts[0] === 3 && theCounts[1] === 2);
 }
 
 function isTriple (hand) {
@@ -111,8 +146,10 @@ module.exports = {
   checkHand,
   valuesFromHand,
   highestCount,
+  allCounts,
   multiplesIn,
   isPair,
+  isFullHouse,
   isTriple,
   isQuadruple,
   suitsFor,
