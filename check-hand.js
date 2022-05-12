@@ -7,6 +7,8 @@ function checkHand (hand) {
     return 'four of a kind';
   } else if (isFlush(hand)) {
     return 'flush';
+  } else if (isStraight(hand)) {
+    return 'straight';
   } else {
     return 'high card';
   }
@@ -82,4 +84,21 @@ function isFlush (hand) {
   return allTheSameSuit(suitsFor(hand));
 }
 
-module.exports = { checkHand, valuesFromHand, highestCount, multiplesIn, isPair, isTriple, isQuadruple, suitsFor, allTheSameSuit };
+function fourAway (values) {
+  return ((+values[values.length - 1] - 4 - +values[0]) === 0);
+}
+
+function noMultiples (values) {
+  return highestCount(values) === 1;
+}
+
+function cardsInSequence (values) {
+  const sortedValues = values.sort();
+  return fourAway(sortedValues) && noMultiples(values);
+}
+
+function isStraight (hand) {
+  return cardsInSequence(valuesFromHand(hand));
+}
+
+module.exports = { checkHand, valuesFromHand, highestCount, multiplesIn, isPair, isTriple, isQuadruple, suitsFor, allTheSameSuit, isFlush, fourAway, noMultiples, cardsInSequence, isStraight };

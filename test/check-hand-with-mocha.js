@@ -4,7 +4,7 @@
 /* eslint-env mocha */
 const deepEqual = require('deep-equal');
 const wish = require('wish');
-const { checkHand, valuesFromHand, highestCount, multiplesIn, isPair, isTriple, isQuadruple, suitsFor, allTheSameSuit } = require('../check-hand');
+const { checkHand, valuesFromHand, highestCount, multiplesIn, isPair, isTriple, isQuadruple, suitsFor, allTheSameSuit, isFlush, fourAway, noMultiples, cardsInSequence, isStraight } = require('../check-hand');
 
 describe('valuesFromHand()', function () {
   it('returns just the values from a hand', function () {
@@ -66,6 +66,45 @@ describe('allTheSameSuit()', function () {
   });
 });
 
+describe('isFlush()', function () {
+  it('handles flush', function () {
+    const result = isFlush(['2-H', '5-H', '9-H', '7-H', '3-H']);
+    wish(result);
+  });
+});
+
+describe('fourAway()', function () {
+  it('reports true if first and last are 4 away', function () {
+    const result = fourAway(['2', '6']);
+    wish(result);
+  });
+});
+
+describe('noMultiples()', function () {
+  it('reports true when all elements are different', function () {
+    const result = noMultiples(['2', '6']);
+    wish(result);
+  });
+  it('reports false when two elements are the same', function () {
+    const result = noMultiples(['2', '2']);
+    wish(!result);
+  });
+});
+
+describe('cardsInSequence()', function () {
+  it('reports true when elements are in sequence and without multiples', function () {
+    const result = cardsInSequence(['1', '2', '3', '4', '5']);
+    wish(result);
+  });
+});
+
+describe('isStraight()', function () {
+  it('handles straight', function () {
+    const result = isStraight(['1-H', '2-H', '3-H', '4-H', '5-D']);
+    wish(result);
+  });
+});
+
 describe('checkHand()', function () {
   it('handles pairs', function () {
     const result = checkHand(['2-H', '3-C', '4-D', '5-H', '2-C']);
@@ -84,6 +123,10 @@ describe('checkHand()', function () {
   it('handles flush', function () {
     const result = checkHand(['2-H', '5-H', '9-H', '7-H', '3-H']);
     wish(result === 'flush');
+  });
+  it('handles straight', function () {
+    const result = checkHand(['1-H', '2-H', '3-H', '4-H', '5-D']);
+    wish(result === 'straight');
   });
   it('handles high card', function () {
     const result = checkHand(['2-H', '5-C', '9-D', '7-S', '3-H']);
