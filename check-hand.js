@@ -1,0 +1,50 @@
+function checkHand (hand) {
+  if (isPair(hand)) {
+    return 'pair';
+  } else {
+    return 'three of a kind';
+  }
+};
+
+function valuesFromHand (hand) {
+  return hand.map(function (card) {
+    return card.split('-')[0];
+  });
+}
+
+function highestCount (values) {
+  const counts = [];
+  values.forEach(function (value, index) {
+    counts[value] = 0;
+    if (value === values[0]) {
+      counts[value] = counts[value] + 1;
+    }
+    if (value === values[1]) {
+      counts[value] = counts[value] + 1;
+    }
+    if (value === values[2]) {
+      counts[value] = counts[value] + 1;
+    }
+    if (value === values[3]) {
+      counts[value] = counts[value] + 1;
+    }
+    if (value === values[4]) {
+      counts[value] = counts[value] + 1;
+    }
+  });
+  const totalCounts = Object.keys(counts).map(function (key) {
+    return counts[key];
+  });
+  return totalCounts.sort(function(a, b) {
+    return b - a;
+  })[0];
+}
+
+function multiplesIn (hand) {
+  return highestCount(valuesFromHand(hand));
+}
+function isPair (hand) {
+  return multiplesIn(hand) === 2;
+}
+
+module.exports = { checkHand, valuesFromHand, highestCount, multiplesIn, isPair };

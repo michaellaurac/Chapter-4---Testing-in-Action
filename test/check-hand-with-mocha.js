@@ -1,19 +1,44 @@
 // Use 'npx mocha' to run these tests from the project directory
 
+/* eslint-env mocha */
+const deepEqual = require('deep-equal');
 const wish = require('wish');
+const { checkHand, valuesFromHand, highestCount, multiplesIn, isPair } = require('../check-hand');
 
-function checkHand(hand) {
-  if (hand[0] === '2-H' && hand[1] === '3-C' && hand[2] === '4-D' && hand[3] === '5-H' && hand[4] === '2-C') {
-    return 'pair';
-  } else {
-    return 'three of a kind';
-  }
-};
+describe('valuesFromHand()', function () {
+  it('returns just the values from a hand', function () {
+    const result = valuesFromHand(['2-H', '3-C', '4-D', '5-H', '2-C']);
+    wish(deepEqual(result, ['2', '3', '4', '5', '2']));
+  });
+});
+
+describe('highestCount()', function () {
+  it('returns count of the most common card from array', function () {
+    const result = highestCount(['2', '3', '4', '5', '2']);
+    wish(result === 2);
+  });
+});
+
+describe('multiplesIn()', function () {
+  it('finds a duplicate', function () {
+    const result = multiplesIn(['2-H', '3-C', '4-D', '5-H', '2-C']);
+    wish(result === 2);
+  });
+});
+
+describe('isPair()', function () {
+  it('finds a pair', function () {
+    const result = isPair(['2-H', '3-C', '4-D', '5-H', '2-C']);
+    wish(result);
+  });
+});
 
 describe('checkHand()', function () {
   it('handles pairs', function () {
     const result = checkHand(['2-H', '3-C', '4-D', '5-H', '2-C']);
     wish(result === 'pair');
+    const anotherResult = checkHand(['3-H', '3-C', '4-D', '5-H', '2-C']);
+    wish(anotherResult === 'pair');
   });
   it('handles three of a kind', function () {
     const result = checkHand(['3-H', '3-C', '3-D', '5-H', '2-H']);
