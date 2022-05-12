@@ -1,3 +1,5 @@
+// Use 'npx mocha' to run these tests from the project directory
+
 const wish = require('wish');
 
 function checkHand(hand) {
@@ -8,18 +10,16 @@ function checkHand(hand) {
   }
 };
 
-describe('checkHand()', function() {
-  it('handles pairs', function() {
+describe('checkHand()', function () {
+  it('handles pairs', function () {
     const result = checkHand(['2-H', '3-C', '4-D', '5-H', '2-C']);
     wish(result === 'pair');
   });
-  it('handles three of a kind', function() {
+  it('handles three of a kind', function () {
     const result = checkHand(['3-H', '3-C', '3-D', '5-H', '2-H']);
     wish(result === 'three of a kind');
   });
 });
-//wish(checkHand(['2-H', '3-C', '4-D', '5-H', '2-C']) === 'pair');
-//wish(checkHand(['3-H', '3-C', '3-D', '5-H', '2-H']) === 'three of a kind');
 
 /*
 // not just multiples
