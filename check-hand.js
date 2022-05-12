@@ -1,8 +1,10 @@
 function checkHand (hand) {
   if (isPair(hand)) {
     return 'pair';
-  } else {
+  } else if (isTriple(hand)) {
     return 'three of a kind';
+  } else if (isQuadruple(hand)) {
+    return 'four of a kind';
   }
 };
 
@@ -43,8 +45,17 @@ function highestCount (values) {
 function multiplesIn (hand) {
   return highestCount(valuesFromHand(hand));
 }
+
 function isPair (hand) {
   return multiplesIn(hand) === 2;
 }
 
-module.exports = { checkHand, valuesFromHand, highestCount, multiplesIn, isPair };
+function isTriple (hand) {
+  return multiplesIn(hand) === 3;
+}
+
+function isQuadruple (hand) {
+  return multiplesIn(hand) === 4;
+}
+
+module.exports = { checkHand, valuesFromHand, highestCount, multiplesIn, isPair, isTriple, isQuadruple };

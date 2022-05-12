@@ -1,10 +1,10 @@
 // Use 'npx mocha' to run these tests from the project directory
 
-// The following line allows recognition of mocha commands by eslint
+// The following line allows recognition of mocha commands by ESLint
 /* eslint-env mocha */
 const deepEqual = require('deep-equal');
 const wish = require('wish');
-const { checkHand, valuesFromHand, highestCount, multiplesIn, isPair } = require('../check-hand');
+const { checkHand, valuesFromHand, highestCount, multiplesIn, isPair, isTriple, isQuadruple } = require('../check-hand');
 
 describe('valuesFromHand()', function () {
   it('returns just the values from a hand', function () {
@@ -30,6 +30,20 @@ describe('multiplesIn()', function () {
 describe('isPair()', function () {
   it('finds a pair', function () {
     const result = isPair(['2-H', '3-C', '4-D', '5-H', '2-C']);
+    wish(result);
+  });
+});
+
+describe('isTriple()', function () {
+  it('handles three of a kind', function () {
+    const result = isTriple(['3-H', '3-C', '3-D', '5-H', '2-H']);
+    wish(result);
+  });
+});
+
+describe('isQuadruple()', function () {
+  it('handles four of a kind', function () {
+    const result = isQuadruple(['3-H', '3-C', '3-D', '3-S', '2-H']);
     wish(result);
   });
 });
