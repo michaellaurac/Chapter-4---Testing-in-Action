@@ -12,6 +12,7 @@ const {
   highestCount,
   allCounts,
   multiplesIn,
+  isTwoPair,
   isPair,
   isFullHouse,
   isTriple,
@@ -51,6 +52,13 @@ describe('multiplesIn()', function () {
   it('finds a duplicate', function () {
     const result = multiplesIn(['2-H', '3-C', '4-D', '5-H', '2-C']);
     wish(result === 2);
+  });
+});
+
+describe('isTwoPair()', function () {
+  it('finds two pair', function () {
+    const result = isTwoPair(['2-D', '2-H', '3-H', '3-D', '8-D']);
+    wish(result);
   });
 });
 
@@ -153,6 +161,10 @@ describe('checkHand()', function () {
     const anotherResult = checkHand(['3-H', '3-C', '4-D', '5-H', '2-C']);
     wish(anotherResult === 'pair');
   });
+  it('handles two pair', function () {
+    const result = checkHand(['2-D', '2-H', '3-H', '3-D', '8-D']);
+    wish(result === 'two pair');
+  });
   it('handles three of a kind', function () {
     const result = checkHand(['3-H', '3-C', '3-D', '5-H', '2-H']);
     wish(result === 'three of a kind');
@@ -183,7 +195,8 @@ describe('checkHand()', function () {
   });
 });
 
-/*
+/* Untested legacy code
+
 // not just multiples
 const checkStraightFlush = function () {
   return false;
@@ -279,4 +292,5 @@ const checkHand = function (hand) {
     return 'high card';
   }
 };
+
 */

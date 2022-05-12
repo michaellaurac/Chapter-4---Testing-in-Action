@@ -1,5 +1,7 @@
 function checkHand (hand) {
-  if (isPair(hand)) {
+  if (isTwoPair(hand)) {
+    return 'two pair';
+  } else if (isPair(hand)) {
     return 'pair';
   } else if (isFullHouse(hand)) {
     return 'full house';
@@ -47,7 +49,7 @@ function highestCount (values) {
   const totalCounts = Object.keys(counts).map(function (key) {
     return counts[key];
   });
-  return totalCounts.sort(function(a, b) {
+  return totalCounts.sort(function (a, b) {
     return b - a;
   })[0];
 }
@@ -75,13 +77,18 @@ function allCounts (values) {
   const totalCounts = Object.keys(counts).map(function (key) {
     return counts[key];
   });
-  return totalCounts.sort(function(a, b) {
+  return totalCounts.sort(function (a, b) {
     return b - a;
   });
 }
 
 function multiplesIn (hand) {
   return highestCount(valuesFromHand(hand));
+}
+
+function isTwoPair (hand) {
+  const theCounts = allCounts(valuesFromHand(hand));
+  return (theCounts[0] === 2 && theCounts[1] === 2);
 }
 
 function isPair (hand) {
@@ -148,6 +155,7 @@ module.exports = {
   highestCount,
   allCounts,
   multiplesIn,
+  isTwoPair,
   isPair,
   isFullHouse,
   isTriple,
