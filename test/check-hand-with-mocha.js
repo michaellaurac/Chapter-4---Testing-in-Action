@@ -59,6 +59,10 @@ describe('checkHand()', function () {
     const result = checkHand(['3-H', '3-C', '3-D', '5-H', '2-H']);
     wish(result === 'three of a kind');
   });
+  it('handles four of a kind', function () {
+    const result = checkHand(['3-H', '3-C', '3-D', '3-S', '2-H']);
+    wish(result === 'four of a kind');
+  });
 });
 
 /*
