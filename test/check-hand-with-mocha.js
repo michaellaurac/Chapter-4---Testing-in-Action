@@ -1,10 +1,28 @@
 // Use 'npx mocha' to run these tests from the project directory
+// Use 'npx mocha -w' once to run these tests from the project
+// directory each time there is a change in the code
 
 // The following line allows recognition of mocha commands by ESLint
 /* eslint-env mocha */
 const deepEqual = require('deep-equal');
 const wish = require('wish');
-const { checkHand, valuesFromHand, highestCount, multiplesIn, isPair, isTriple, isQuadruple, suitsFor, allTheSameSuit, isFlush, fourAway, noMultiples, cardsInSequence, isStraight } = require('../check-hand');
+const {
+  checkHand,
+  valuesFromHand,
+  highestCount,
+  multiplesIn,
+  isPair,
+  isTriple,
+  isQuadruple,
+  suitsFor,
+  allTheSameSuit,
+  isFlush,
+  fourAway,
+  noMultiples,
+  cardsInSequence,
+  isStraight,
+  isStraightFlush
+} = require('../check-hand');
 
 describe('valuesFromHand()', function () {
   it('returns just the values from a hand', function () {
@@ -105,6 +123,13 @@ describe('isStraight()', function () {
   });
 });
 
+describe('isStraightFlush()', function () {
+  it('handles straight flush', function () {
+    const result = isStraightFlush(['1-H', '2-H', '3-H', '4-H', '5-H']);
+    wish(result);
+  });
+});
+
 describe('checkHand()', function () {
   it('handles pairs', function () {
     const result = checkHand(['2-H', '3-C', '4-D', '5-H', '2-C']);
@@ -127,6 +152,10 @@ describe('checkHand()', function () {
   it('handles straight', function () {
     const result = checkHand(['1-H', '2-H', '3-H', '4-H', '5-D']);
     wish(result === 'straight');
+  });
+  it('handles straight flush', function () {
+    const result = checkHand(['1-H', '2-H', '3-H', '4-H', '5-H']);
+    wish(result === 'straight flush');
   });
   it('handles high card', function () {
     const result = checkHand(['2-H', '5-C', '9-D', '7-S', '3-H']);

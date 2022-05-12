@@ -5,6 +5,8 @@ function checkHand (hand) {
     return 'three of a kind';
   } else if (isQuadruple(hand)) {
     return 'four of a kind';
+  } else if (isStraightFlush(hand)) {
+    return 'straight flush';
   } else if (isFlush(hand)) {
     return 'flush';
   } else if (isStraight(hand)) {
@@ -101,4 +103,24 @@ function isStraight (hand) {
   return cardsInSequence(valuesFromHand(hand));
 }
 
-module.exports = { checkHand, valuesFromHand, highestCount, multiplesIn, isPair, isTriple, isQuadruple, suitsFor, allTheSameSuit, isFlush, fourAway, noMultiples, cardsInSequence, isStraight };
+function isStraightFlush (hand) {
+  return isStraight(hand) && isFlush(hand);
+}
+
+module.exports = {
+  checkHand,
+  valuesFromHand,
+  highestCount,
+  multiplesIn,
+  isPair,
+  isTriple,
+  isQuadruple,
+  suitsFor,
+  allTheSameSuit,
+  isFlush,
+  fourAway,
+  noMultiples,
+  cardsInSequence,
+  isStraight,
+  isStraightFlush
+};
