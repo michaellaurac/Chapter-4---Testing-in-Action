@@ -5,6 +5,10 @@ function checkHand (hand) {
     return 'three of a kind';
   } else if (isQuadruple(hand)) {
     return 'four of a kind';
+  } else if (isFlush(hand)) {
+    return 'flush';
+  } else {
+    return 'high card';
   }
 };
 
@@ -58,4 +62,24 @@ function isQuadruple (hand) {
   return multiplesIn(hand) === 4;
 }
 
-module.exports = { checkHand, valuesFromHand, highestCount, multiplesIn, isPair, isTriple, isQuadruple };
+function suitsFor (hand) {
+  return hand.map(function (card) {
+    return card.split('-')[1];
+  });
+}
+
+function allTheSameSuit (suits) {
+  let toReturn = true;
+  suits.forEach(function (suit) {
+    if (suit !== suits[0]) {
+      toReturn = false;
+    }
+  });
+  return toReturn;
+}
+
+function isFlush (hand) {
+  return allTheSameSuit(suitsFor(hand));
+}
+
+module.exports = { checkHand, valuesFromHand, highestCount, multiplesIn, isPair, isTriple, isQuadruple, suitsFor, allTheSameSuit };

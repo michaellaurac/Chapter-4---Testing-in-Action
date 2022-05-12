@@ -4,7 +4,7 @@
 /* eslint-env mocha */
 const deepEqual = require('deep-equal');
 const wish = require('wish');
-const { checkHand, valuesFromHand, highestCount, multiplesIn, isPair, isTriple, isQuadruple } = require('../check-hand');
+const { checkHand, valuesFromHand, highestCount, multiplesIn, isPair, isTriple, isQuadruple, suitsFor, allTheSameSuit } = require('../check-hand');
 
 describe('valuesFromHand()', function () {
   it('returns just the values from a hand', function () {
@@ -48,6 +48,24 @@ describe('isQuadruple()', function () {
   });
 });
 
+describe('suitsFor()', function () {
+  it('returns the suit of each cards', function () {
+    const result = suitsFor(['2-H', '3-C', '4-D', '5-S', '2-C']);
+    wish(deepEqual(result, ['H', 'C', 'D', 'S', 'C']));
+  });
+});
+
+describe('allTheSameSuit()', function () {
+  it('reports true if elements are the same', function () {
+    const result = allTheSameSuit(['D', 'D', 'D', 'D', 'D']);
+    wish(result);
+  });
+  it('reports false if elements are not the same', function () {
+    const result = allTheSameSuit(['D', 'H', 'D', 'D', 'D']);
+    wish(!result);
+  });
+});
+
 describe('checkHand()', function () {
   it('handles pairs', function () {
     const result = checkHand(['2-H', '3-C', '4-D', '5-H', '2-C']);
@@ -62,6 +80,14 @@ describe('checkHand()', function () {
   it('handles four of a kind', function () {
     const result = checkHand(['3-H', '3-C', '3-D', '3-S', '2-H']);
     wish(result === 'four of a kind');
+  });
+  it('handles flush', function () {
+    const result = checkHand(['2-H', '5-H', '9-H', '7-H', '3-H']);
+    wish(result === 'flush');
+  });
+  it('handles high card', function () {
+    const result = checkHand(['2-H', '5-C', '9-D', '7-S', '3-H']);
+    wish(result === 'high card');
   });
 });
 
