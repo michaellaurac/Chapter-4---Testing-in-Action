@@ -1,30 +1,30 @@
-const s = ['H', 'D', 'S', 'C'];
-const v = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-const c = [];
-const rS = function () {
-  return s[Math.floor(Math.random() * (s.length))];
+const suits = ['H', 'D', 'S', 'C'];
+const values = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+
+const randomSuit = function () {
+  return suits[Math.floor(Math.random() * (suits.length))];
 };
-const rV = function () {
-  return v[Math.floor(Math.random() * (v.length))];
+const randomValue = function () {
+  return values[Math.floor(Math.random() * (values.length))];
 };
-const rC = function () {
-  return rV() + '-' + rS();
+const randomCard = function () {
+  return randomValue() + '-' + randomSuit();
 };
 
-const doIt = function () {
-  let c = [];
-  c.push(rC());
-  c.push(rC());
-  c.push(rC());
-  c.push(rC());
-  c.push(rC());
-  return c;
+const randomHand = function () {
+  const cards = [];
+  cards.push(randomCard());
+  cards.push(randomCard());
+  cards.push(randomCard());
+  cards.push(randomCard());
+  cards.push(randomCard());
+  return cards;
 };
-console.log(doIt());
+console.log(randomHand());
 
 module.exports = {
-  doIt,
-  rC,
-  rV,
-  rS
+  randomHand,
+  randomCard,
+  randomValue,
+  randomSuit
 };
