@@ -46,10 +46,4 @@ describe('randomHand()', function () {
   it('returns 5 random cards', function () {
     wish(randomHand().length === 5);
   });
-  for (let i = 0; i < 100; i++) {
-    it('should not have the first two cards be the same', function () {
-      const result = randomHand();
-      wish(result[0] !== result[1]);
-    });
-  }
 });
