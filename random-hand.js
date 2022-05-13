@@ -20,14 +20,29 @@ const randomCard = function () {
   return randomValue() + '-' + randomSuit();
 };
 
+const spliceCard = function (cardArray) {
+  const takeAway = cardArray.splice(Math.floor(Math.random() * cardArray.length), 1)[0];
+  return [takeAway, cardArray];
+};
+
 const randomHand = function () {
   const cards = [];
-  const cardArray = buildCardArray();
-  cards.push(cardArray.splice(Math.floor(Math.random() * cardArray.length), 1)[0]);
-  cards.push(cardArray.splice(Math.floor(Math.random() * cardArray.length), 1)[0]);
-  cards.push(cardArray.splice(Math.floor(Math.random() * cardArray.length), 1)[0]);
-  cards.push(cardArray.splice(Math.floor(Math.random() * cardArray.length), 1)[0]);
-  cards.push(cardArray.splice(Math.floor(Math.random() * cardArray.length), 1)[0]);
+  let cardArray = buildCardArray();
+  let result = spliceCard(cardArray);
+  cards[0] = result[0];
+  cardArray = result[1];
+  result = spliceCard(cardArray);
+  cards[1] = result[0];
+  cardArray = result[1];
+  result = spliceCard(cardArray);
+  cards[2] = result[0];
+  cardArray = result[1];
+  result = spliceCard(cardArray);
+  cards[3] = result[0];
+  cardArray = result[1];
+  result = spliceCard(cardArray);
+  cards[4] = result[0];
+  cardArray = result[1];
   return cards;
 };
 console.log(randomHand());
