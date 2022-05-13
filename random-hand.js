@@ -28,21 +28,11 @@ const spliceCard = function (cardArray) {
 const randomHand = function () {
   const cards = [];
   let cardArray = buildCardArray();
-  let result = spliceCard(cardArray);
-  cards[0] = result[0];
-  cardArray = result[1];
-  result = spliceCard(cardArray);
-  cards[1] = result[0];
-  cardArray = result[1];
-  result = spliceCard(cardArray);
-  cards[2] = result[0];
-  cardArray = result[1];
-  result = spliceCard(cardArray);
-  cards[3] = result[0];
-  cardArray = result[1];
-  result = spliceCard(cardArray);
-  cards[4] = result[0];
-  cardArray = result[1];
+  [cards[0], cardArray] = spliceCard(cardArray);
+  [cards[1], cardArray] = spliceCard(cardArray);
+  [cards[2], cardArray] = spliceCard(cardArray);
+  [cards[3], cardArray] = spliceCard(cardArray);
+  [cards[4], cardArray] = spliceCard(cardArray);
   return cards;
 };
 console.log(randomHand());
