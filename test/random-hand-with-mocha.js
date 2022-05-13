@@ -8,10 +8,8 @@ const deepEqual = require('deep-equal');
 const wish = require('wish');
 const {
   buildCardArray,
-  randomHand,
-  randomCard,
-  randomValue,
-  randomSuit
+  spliceCard,
+  randomHand
 } = require('../random-hand');
 
 describe('buildCardArray()', function () {
@@ -33,6 +31,17 @@ describe('buildCardArray()', function () {
     ]));
   });
 });
+describe('spliceCard()', function () {
+  it('returns two things', function () {
+    wish(spliceCard(buildCardArray()).length === 2);
+  });
+  it('returns the selected card', function () {
+    wish(spliceCard(buildCardArray())[0].match(/\w{1,2}-[HDSC]/));
+  });
+  it('returns an array with one card gone', function () {
+    wish(spliceCard(buildCardArray())[1].length === buildCardArray().length - 1);
+  });
+});
 describe('randomHand()', function () {
   it('returns 5 random cards', function () {
     wish(randomHand().length === 5);
@@ -43,19 +52,4 @@ describe('randomHand()', function () {
       wish(result[0] !== result[1]);
     });
   }
-});
-describe('randomCard()', function () {
-  it('returns a random card', function () {
-    wish(randomCard().match(/\w{1,2}-[HDSC]/));
-  });
-});
-describe('randomValue()', function () {
-  it('returns a random card value', function () {
-    wish(randomValue().match(/\w{1,2}/));
-  });
-});
-describe('randomSuit()', function () {
-  it('returns a random card suit', function () {
-    wish(randomSuit().match(/[HDSC]/));
-  });
 });

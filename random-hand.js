@@ -10,15 +10,6 @@ const buildCardArray = function () {
   }
   return tempArray;
 };
-const randomSuit = function () {
-  return suits[Math.floor(Math.random() * (suits.length))];
-};
-const randomValue = function () {
-  return values[Math.floor(Math.random() * (values.length))];
-};
-const randomCard = function () {
-  return randomValue() + '-' + randomSuit();
-};
 
 const spliceCard = function (cardArray) {
   const takeAway = cardArray.splice(Math.floor(Math.random() * cardArray.length), 1)[0];
@@ -39,8 +30,6 @@ console.log(randomHand());
 
 module.exports = {
   buildCardArray,
-  randomHand,
-  randomCard,
-  randomValue,
-  randomSuit
+  spliceCard,
+  randomHand
 };
