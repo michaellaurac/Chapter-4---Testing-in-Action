@@ -22,11 +22,12 @@ const randomCard = function () {
 
 const randomHand = function () {
   const cards = [];
-  cards.push(randomCard());
-  cards.push(randomCard());
-  cards.push(randomCard());
-  cards.push(randomCard());
-  cards.push(randomCard());
+  const deckSize = 52;
+  cards.push(buildCardArray()[Math.floor(Math.random() * deckSize)]);
+  cards.push(buildCardArray()[Math.floor(Math.random() * deckSize)]);
+  cards.push(buildCardArray()[Math.floor(Math.random() * deckSize)]);
+  cards.push(buildCardArray()[Math.floor(Math.random() * deckSize)]);
+  cards.push(buildCardArray()[Math.floor(Math.random() * deckSize)]);
   return cards;
 };
 console.log(randomHand());
