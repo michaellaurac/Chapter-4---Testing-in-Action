@@ -12,11 +12,19 @@ const rC = function () {
 };
 
 const doIt = function () {
+  let c = [];
   c.push(rC());
   c.push(rC());
   c.push(rC());
   c.push(rC());
   c.push(rC());
+  return c;
 };
-doIt();
-console.log(c);
+console.log(doIt());
+
+module.exports = {
+  doIt,
+  rC,
+  rV,
+  rS
+};
