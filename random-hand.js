@@ -26,7 +26,6 @@ const randomHand = function () {
   [cards[4], cardArray] = spliceCard(cardArray);
   return cards;
 };
-console.log(randomHand());
 
 module.exports = {
   buildCardArray,
